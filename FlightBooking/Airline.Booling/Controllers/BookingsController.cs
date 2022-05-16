@@ -229,29 +229,51 @@ namespace Airline.Booking.Controllers
         {
             try
             {
-                IEnumerable<Bookings> bookings = _userRepository.GetBookings().ToList().Where(o => o.TicketID == TicketID).Take(1);
-                foreach (Bookings booking in bookings)
-                {
-                    booking.Status = 1;
-                    booking.Statusstr = "Canceled Ticket";
-                    using (var scope = new TransactionScope())
-                    {
-                        _userRepository.UpdateBooking(booking);
-                        scope.Complete();
-                        await _topicProducer.Produce(new BookingEvent
-                        {
-                            FlightNumber = booking.FlightNumber,
-                            FromPlace = booking.FromPlace,
-                            ToPlace = booking.ToPlace,
-                            StartDate = booking.DateOfJourney,
-                            startTime = booking.BoardingTime,
-                            NumberOfTickets = 1,
-                            Settype = (int)(Seattype)booking.Seattype,
-                            tickettype=1,
-                        });
-                    }
-                }
+                Bookings bookings = _userRepository.GetBookings().ToList().Where(o => o.TicketID == TicketID).FirstOrDefault();
+                #region
+                //foreach (Bookings booking in bookings)
+                //{
+                //    booking.Status = 1;
+                //    booking.Statusstr = "Canceled Ticket";
+                //    using (var scope = new TransactionScope())
+                //    {
+                //        _userRepository.UpdateBooking(booking);
 
+
+                //        await _topicProducer.Produce(new BookingEvent
+                //        {
+                //            FlightNumber = booking.FlightNumber,
+                //            FromPlace = booking.FromPlace,
+                //            ToPlace = booking.ToPlace,
+                //            StartDate = booking.DateOfJourney,
+                //            startTime = booking.BoardingTime,
+                //            NumberOfTickets = 1,
+                //            Settype = (int)(Seattype)booking.Seattype,
+                //            tickettype=1,
+                //        });
+                //        scope.Complete();
+                //    }
+
+                //}
+                #endregion
+                using (var scope = new TransactionScope())
+                {
+                    bookings.Status = 1;
+                    bookings.Statusstr = "Canceled Ticket";
+                    _userRepository.UpdateBooking(bookings); 
+                    scope.Complete();
+                }
+                await _topicProducer.Produce(new BookingEvent
+                {
+                    FlightNumber = bookings.FlightNumber,
+                    FromPlace = bookings.FromPlace,
+                    ToPlace = bookings.ToPlace,
+                    StartDate = bookings.DateOfJourney,
+                    startTime = bookings.BoardingTime,
+                    NumberOfTickets = 1,
+                    Settype = (int)(Seattype)bookings.Seattype,
+                    tickettype = 1,
+                });
                 return Accepted(new Status {TicketID=TicketID ,CancelStatus = "cancel"});
             }
             catch(Exception ex)
