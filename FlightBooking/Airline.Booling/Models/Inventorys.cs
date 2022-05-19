@@ -53,6 +53,8 @@ namespace Airline.Booking.Models
         public DateTime CreatedDate { set; get; }
         public string Updatedby { set; get; }
         public DateTime? UpdatedDate { set; get; }
+        [Required]
+        public char IsActive { set; get; }
 
     }
 }

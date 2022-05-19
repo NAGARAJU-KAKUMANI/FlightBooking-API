@@ -13,6 +13,12 @@ namespace Airline.Inventory.Repository
         void CancelInventory(int id);
 
         void updateBookingCount(Inventorys inventorys);
+
+        
         IEnumerable<AirLine> GetAirline();
+
+        void PlanAirline(AirLine airline);
+
+        void UpdateAirline(AirLine airLine);
     }
 }

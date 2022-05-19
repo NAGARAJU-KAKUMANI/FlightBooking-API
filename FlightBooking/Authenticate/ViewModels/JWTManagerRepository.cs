@@ -37,7 +37,7 @@ namespace Authenticate.ViewModels
             if (value)
             {
                  Users userecordemail = _usersDbContext.tblUserRegistor.ToList().Where(o=>o.Email==users.Email || o.Mobile==users.Mobile).FirstOrDefault();
-                if (userecordemail == null)
+                if (userecordemail != null)
                 {
                     return null;
                 }

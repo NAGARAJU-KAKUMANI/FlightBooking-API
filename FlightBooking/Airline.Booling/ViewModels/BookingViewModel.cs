@@ -25,16 +25,16 @@ namespace Airline.Booking.ViewModels
         public string CreatedBy { set; get; }
         [Required]
         public Seattype? Seattype { set; get; }
-        [Required]
-        [StringLength(50)]
-        public string UserName { set; get; }
-        [Required]
-        [StringLength(20)]
-        public string passportNumber { set; get; }
-        [Required]
-        public int Age { set; get; }
         //[Required]
-        //public List<UsersViewModel> BookingUsers { set; get; }
+        //[StringLength(50)]
+        //public string UserName { set; get; }
+        //[Required]
+        //[StringLength(20)]
+        //public string passportNumber { set; get; }
+        //[Required]
+        //public int Age { set; get; }
+        [Required]
+        public IEnumerable<UsersViewModel> BookingUsers { set; get; }
 
     }
 }

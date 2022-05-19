@@ -25,6 +25,12 @@ namespace Airline.Inventory.Repository
             return _inventoryDbContext.tblAirLine.ToList();
         }
 
+        public void PlanAirline(AirLine airline)
+        {
+            _inventoryDbContext.tblAirLine.Add(airline);
+            _inventoryDbContext.SaveChanges();
+        }
+
         public void PlanInventory(Inventorys inventory)
         {
             _inventoryDbContext.tblInventoy.Add(inventory);
@@ -34,6 +40,12 @@ namespace Airline.Inventory.Repository
         public IEnumerable<Inventorys> ShowInventories()
         {
             return _inventoryDbContext.tblInventoy.ToList();
+        }
+
+        public void UpdateAirline(AirLine airLine)
+        {
+            _inventoryDbContext.Entry(airLine).State = EntityState.Modified;
+            _inventoryDbContext.SaveChanges();
         }
 
         public void updateBookingCount(Inventorys inventorys)
