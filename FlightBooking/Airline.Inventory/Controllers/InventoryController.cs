@@ -68,7 +68,12 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }    
         }
-        //[Authorize]
+        /// <summary>
+        /// Get All inventories base on Login user id
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Route("get-all-inventories/{userid}")]
         public IActionResult GetAllInventorie(string userid)
@@ -132,6 +137,11 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
+        /// <summary>
+        /// Plan inventories can add only admin 
+        /// </summary>
+        /// <param name="inventoryviewModel"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [Route("PlanInventory")]
@@ -185,7 +195,11 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
-
+        /// <summary>
+        /// Cancel Inventories this can access only Admin
+        /// </summary>
+        /// <param name="cancelViewModel"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [Route("cancel-inventories")]
@@ -210,8 +224,12 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
-
-        //[Authorize]
+        /// <summary>
+        /// Get Edit Serch inventory based on Flight Number
+        /// </summary>
+        /// <param name="flightNumber"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Route("get-edit-inventories/{flightNumber}")]
         public IActionResult GetEditInventorie(string flightNumber)
@@ -252,7 +270,12 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
-
+        /// <summary>
+        /// Update Inventory details Accessble to Admin
+        /// </summary>
+        /// <param name="inventoryviewModel"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [Route("EditUpdateInventory")]
         public IActionResult EditUpdateInventory([FromBody] InventoryViewModel inventoryviewModel)
@@ -311,7 +334,11 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
-
+        /// <summary>
+        /// Get All Airline Details 
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Route("get-all-Airlines")]
         public IActionResult GetAllAirline()
@@ -336,6 +363,12 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
+        /// <summary>
+        /// add new Airline
+        /// </summary>
+        /// <param name="airlineViewModel"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [Route("PlanAirline")]
         public IActionResult AddNewAirline([FromBody] airlineViewModel airlineViewModel)
@@ -373,8 +406,12 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
-
-        //[Authorize]
+        /// <summary>
+        /// Cancel Wxisting AirLine
+        /// </summary>
+        /// <param name="cancelAirlineViewModel"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [Route("cancel-Airline")]
         public IActionResult CancelAirline([FromBody] CancelAirlineViewModel cancelAirlineViewModel)
@@ -397,8 +434,12 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
-
-        //[Authorize]
+        /// <summary>
+        /// Get Airline Details By ID
+        /// </summary>
+        /// <param name="airlineId"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Route("get-edit-airline/{airlineId}")]
         public IActionResult GetEditAirline(int airlineId)
@@ -423,7 +464,12 @@ namespace Airline.Inventory.Controllers
                 return BadRequest();
             }
         }
-
+        /// <summary>
+        /// Update Airline Details 
+        /// </summary>
+        /// <param name="updaeAirlineViewModel"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [Route("EditUpdateAirline")]
         public IActionResult EditUpdateInventory([FromBody] updaeAirlineViewModel updaeAirlineViewModel)

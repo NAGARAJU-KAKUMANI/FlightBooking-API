@@ -76,29 +76,6 @@ namespace Airline.Booking.Controllers
                 {
                     seatNumber = (int)(_inventorys.NBclassAvailableCount - _inventorys.NBclassAvailableCount) + 1;
                 }
-                //bookings = new Bookings();
-                //bookings.TicketID = GenerateticketID();
-                //bookings.BookingID = BookingId;
-                //bookings.FlightNumber = flightNumber;
-                //bookings.DateOfJourney = DateOfJourney;
-                //bookings.FromPlace = FromPlace;
-                //bookings.ToPlace = ToPlace;
-                //bookings.BoardingTime = BoardingTime;
-                //bookings.EmailID = EmailID;
-                //bookings.UserName = bookingViewModel.UserName;
-                //bookings.passportNumber = bookingViewModel.passportNumber;
-                //bookings.Age = bookingViewModel.Age;
-                //bookings.SeatNumber = seatNumber;
-                //bookings.Status = 0;
-                //bookings.Statusstr = "Ticket Booked";
-                //bookings.CreatedBy = CreatedBy;
-                //bookings.CreatedDate = DateTime.Now;
-                //bookings.Seattype = bookingViewModel.Seattype;
-                //using (var scope = new TransactionScope())
-                //{
-                //    _userRepository.Insert(bookings);
-                //    scope.Complete();
-                //}
                 #region
                 foreach (UsersViewModel usersViewModel in _usersViewModels)
                 {
@@ -331,7 +308,10 @@ namespace Airline.Booking.Controllers
                 return BadRequest();
             }
         }
-
+        /// <summary>
+        /// Get All Inventories
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         [Route("get-all-Inventory")]
